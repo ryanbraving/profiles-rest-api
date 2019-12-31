@@ -1,6 +1,10 @@
 from django.contrib import admin
-from profiles_api import models
+from .models import UserProfile
 
 # Register your models here.
 
-admin.site.register(models.UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email')
+    list_display_links = ('id', 'name', 'email')
+
+admin.site.register(UserProfile, UserProfileAdmin)
