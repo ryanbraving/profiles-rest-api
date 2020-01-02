@@ -18,7 +18,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'password': {
                 'write_only': True,
                 'style': { 'input_type': 'password'}
-            }
+            },
         }
 
     def create(self, validated_data):
@@ -31,6 +31,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
+        """Hashing password on the update method"""
         for attr, value in validated_data.items():
             if attr == 'password':
                 instance.set_password(value)
